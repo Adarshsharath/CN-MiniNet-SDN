@@ -74,6 +74,7 @@ ryu-manager controller.py
 ```bash
 sudo mn --custom topo.py --topo demo --controller=remote
 ```
+![RunningMininet](Screenshots/runningmininet.png)
 
 ### Step 3: View the Network Topology
 
@@ -82,6 +83,8 @@ mininet> net
 ```
 
 ---
+
+![net topo](Screenshots/net.png)
 
 ## 🖧 Network Topology
 
@@ -127,6 +130,8 @@ h1 → s1 → s3 → s4 → h3
 - **Installs flow rules** dynamically upon first packet arrival
 - Uses **match–action** forwarding based on source/destination
 
+![Controller Running](Screenshots/runningcontroller.png)
+
 ### Behavior
 
 | Scenario | Result |
@@ -146,8 +151,9 @@ mininet> h1 ping h3
 
 - ✔ Packets successfully delivered
 - ✔ Static routing path `h1 → s1 → s3 → s4 → h3` followed
-
 ---
+
+![Ping h1>h3](Screenshots/h1toh3.png)
 
 ### ❌ 7.2 — Unused Path (`h1 → h2`)
 
@@ -159,6 +165,7 @@ mininet> h1 ping h2
 - ✔ Confirms alternate path (`s2`) is intentionally unused
 
 ---
+![Ping h1>h2](Screenshots/h1toh2.png)
 
 ### 📋 7.3 — Flow Table Verification
 
@@ -170,6 +177,7 @@ mininet> sh ovs-ofctl -O OpenFlow13 dump-flows s1
 - ✔ Confirms correct controller-driven forwarding behavior
 
 ---
+![Flow Rules](Screenshots/flowrules.png)
 
 ### ❌ 7.4 — Failure Scenario
 
@@ -177,6 +185,7 @@ mininet> sh ovs-ofctl -O OpenFlow13 dump-flows s1
 mininet> link s3 s4 down
 mininet> h1 ping h3
 ```
+![Ping h1>h3](Screenshots/linkdown.png)
 
 - ❌ Communication fails after link is brought down
 - ✔ Demonstrates that **no automatic rerouting** occurs with static routing
